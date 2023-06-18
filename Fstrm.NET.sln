@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fstrm.NET", "src\Fstrm.NET\Fstrm.NET.csproj", "{69A530A8-7947-4D9D-BAFF-4C953C8F1CB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fstrm.NET.Tests", "Fstrm.NET.Tests\Fstrm.NET.Tests.csproj", "{20D8BA26-A268-424E-A215-BA82E5BCFD17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fstrm.NET.Tests", "src\Fstrm.NET.Tests\Fstrm.NET.Tests.csproj", "{20D8BA26-A268-424E-A215-BA82E5BCFD17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
