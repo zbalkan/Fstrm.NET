@@ -65,6 +65,7 @@ namespace Fstrm.NET
 
         public void Reset()
         {
+            _buffer.Clear();
             _dataframeLength = null;
             _controlframeLength = null;
         }
@@ -145,6 +146,7 @@ namespace Fstrm.NET
             var isControlFrame = false;
 
             byte[] payload;
+
             // read from the buffer
             if (_dataframeLength == 0)
             {
