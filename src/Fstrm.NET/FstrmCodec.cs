@@ -97,7 +97,7 @@ namespace Fstrm.NET
                 }
 
                 // enough data, decode frame length
-                _dataframeLength = Convert.ToInt32(_buffer.Take(FRAME_LENGTH_SECTION_SIZE).ToArray());
+                _dataframeLength = UnpackInt(_buffer, FRAME_LENGTH_SECTION_SIZE);
                 _buffer = _buffer.Skip(FRAME_LENGTH_SECTION_SIZE).ToList();
             }
 
@@ -303,7 +303,7 @@ namespace Fstrm.NET
             return Decode().Payload;
         }
 
-        private static int UnpackInt(IEnumerable<byte> bytes, int size) => Convert.ToInt32(bytes.Take(size).ToArray());
+        private static int UnpackInt(IEnumerable<byte> bytes, int size) => BitConverter.ToInt32(bytes.Take(size).ToArray());
 
         private static Frame CreateDataFrame(byte[] frame) => new Frame(FrameTypeEnum.FSTRM_DATA_FRAME, Array.Empty<byte>(), frame);
 
