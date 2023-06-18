@@ -7,11 +7,11 @@ namespace Fstrm.NET
     /*
      * fstrm is a C implementation of the Frame Streams data transport protocol.
      * https://farsightsec.github.io/fstrm/
-     * 
+     *
      * Frame Streams Control Frame Format - Data frame length equals 00 00 00 00
-     * 
+     *
      * |------------------------------------|----------------------|
-     * | Data frame length                  | 4 bytes              |  
+     * | Data frame length                  | 4 bytes              |
      * |------------------------------------|----------------------|
      * | Control frame length               | 4 bytes              |
      * |------------------------------------|----------------------|
@@ -21,21 +21,21 @@ namespace Fstrm.NET
      * |------------------------------------|----------------------|
      * | Control frame content type length  | 4 bytes (optional)   |
      * |------------------------------------|----------------------|
-     * | Content type payload               | xx bytes             |     
+     * | Content type payload               | xx bytes             |
      * |------------------------------------|----------------------|
-     * 
+     *
      * Frame Streams Data Frame Format
-     * 
+     *
      * |------------------------------------|----------------------|
      * | Data frame length                  | 4 bytes              |
      * |------------------------------------|----------------------|
      * | Payload - Protobuf                 | xx bytes             |
      * |------------------------------------|----------------------|
-     * 
-     * 
+     *
+     *
      * The C# implementation is based on the Python implementation.
      * https://github.com/dmachard/python-framestream
-     * 
+     *
      */
     public class FstrmCodec
     {
@@ -45,7 +45,7 @@ namespace Fstrm.NET
         private const int CONTROL_FRAME_CONTENT_TYPE_LENGTH_SIZE = 4;
 
         private const int FRAME_LENGTH_SECTION_SIZE = 4;
-        private List<byte> _buffer;
+        private List<byte> _buffer; // TODO: Use a more performant data structure than List
         private int? _dataframeLength;
         private int? _controlframeLength;
 
@@ -98,7 +98,7 @@ namespace Fstrm.NET
 
                 // enough data, decode frame length
                 _dataframeLength = Convert.ToInt32(_buffer.Take(FRAME_LENGTH_SECTION_SIZE).ToArray());
-                _buffer = _buffer.Skip<byte>(FRAME_LENGTH_SECTION_SIZE).ToList();
+                _buffer = _buffer.Skip(FRAME_LENGTH_SECTION_SIZE).ToList();
             }
 
             //  control frame ?
@@ -113,7 +113,7 @@ namespace Fstrm.NET
                 if (!_controlframeLength.HasValue)
                 {
                     _controlframeLength = UnpackInt(_buffer, FRAME_LENGTH_SECTION_SIZE);
-                    _buffer = _buffer.Skip<byte>(FRAME_LENGTH_SECTION_SIZE).ToList();
+                    _buffer = _buffer.Skip(FRAME_LENGTH_SECTION_SIZE).ToList();
                 }
 
                 // need more data ?
